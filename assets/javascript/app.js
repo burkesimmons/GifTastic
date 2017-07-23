@@ -63,9 +63,13 @@
         var movie = $("#movie-input").val().trim();
         // The movie from the textbox is then added to our array
         // Calling renderButtons which handles the processing of our movie array
-          var btn = document.createElement("BUTTON");
-          var t = document.createTextNode(movie);
-          btn.appendChild(t);
+          var btn = $('<button>');
+          // var t = document.createTextNode(movie);
+          btn.text(movie);
+          // btn.appendChild(t);
+          btn.addClass('movie');
+          btn.attr('data-name', movie);
+          console.log(btn);
           // document.body.appendChild(btn);
 
 
