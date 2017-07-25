@@ -25,7 +25,7 @@
     </form>
     <div id="gifs-appear-here">
     <!-- Movies will get dumped Dere -->
-    <div id="movies-view"></div>
+    <!-- <div id="movies-view"></div> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="assets/javascript/app.js"></script>
@@ -33,60 +33,48 @@
   </body>
 
   <!-- <body>
-  <img src="http://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" data-still="http://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" data-animate="http://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200.gif" data-state="still" class="gif">
-  <img src="http://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" data-still="http://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" data-animate="http://media2.giphy.com/media/8rFQp4kHXJ0gU/200.gif" data-state="still" class="gif">
-  <img src="http://media3.giphy.com/media/W6LbnBigDe4ZG/200_s.gif" data-still="http://media3.giphy.com/media/W6LbnBigDe4ZG/200_s.gif" data-animate="http://media3.giphy.com/media/W6LbnBigDe4ZG/200.gif" data-state="still" class="gif">
+  <div id="imagediv"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
-    $(".gif").on("click", function() {
-      // STEP ONE: study the html above.
-      // Look at all the data attributes.
-      // Run the file in the browser. Look at the images.
-
-      // After we complete steps 1 and 2 we'll be able to pause gifs from giphy.
-
-      // STEP TWO: make a variable named state and then store the image's data-state into it.
-      var img = $(this);
+    
+    $('body').on('click', '.gif', function() {
+      var current = $(this);
       var state = $(this).attr('data-state');
-      var animateUrl = img.attr('data-animate');
-      var stillUrl = img.attr('data-still');
-      // Use the .attr() method for this.
-      // CODE GOES HERE
-
-      // =============================================
-
-      // STEP THREE: Check if the variable state is equal to 'still',
-      // then update the src attribute of this image to it's data-animate value,
-      // and update the data-state attribute to 'animate'.
+      console.log(state);
+      var animateUrl = current.attr('data-animate');
+      console.log(animateUrl);
+      var stillUrl = current.attr('data-still');
+      
       if(state === 'still') {
-        img.attr('src', animateUrl);
-        img.attr('data-state', 'animate');
-
-        // $(this).attr('src', $(this).attr('data-animate'));
-        // $(this).attr("data-state", 'animate');
-
-        // state.attr("src", 'data-animate');
-        // state = animate;
+        current.attr('src', animateUrl);
+        current.attr('data-state', 'animate');
       } else {
-        img.attr('src', stillUrl);
-        img.attr('data-state', 'still');
-
-        // $(this).attr("src", $(this).attr('data-still'));
-        // $(this).attr("data-state", 'still');
-        // $(this).attr('data-animate');
-        // state = still;
+        current.attr('src', stillUrl);
+        current.attr('data-state', 'still');
       };
-      // If state does not equal 'still', then update the src attribute of this
-      // image to it's data-animate value and update the data-state attribute to 'still'
-      // ============== FILL IN CODE HERE FOR STEP THREE =========================
-
-      // CODE GOES HERE
-
-      // ==============================================
-
-      // STEP FOUR: open the file in the browser and click on the images.
-      // Then click again to pause.
     });
+
+    function displayGif () {
+
+    var queryURL = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
+    
+    $.ajax({
+      url: queryURL,
+      method: 'GET'
+    }).done(function(response) {
+      console.log(response);
+      for (var i = 0; i < response.data.length; i++) {
+        var img = $('<img>'); //Equivalent: $(document.createElement('img'))
+        img.attr('src', response.data[i].images.original_still.url);
+        img.attr('data-still', response.data[i].images.original_still.url);
+        img.attr('data-animate', response.data[i].images.original.url);
+        img.attr('data-state', 'still');
+        img.addClass('gif');
+        img.appendTo('#imagediv');
+      };
+    });
+  };
+  displayGif();
   </script>
 </body> -->
 

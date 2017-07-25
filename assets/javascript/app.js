@@ -1,11 +1,26 @@
-
+      $('body').on('click', '.gif', function() {
+      var current = $(this);
+      var state = $(this).attr('data-state');
+      console.log(state);
+      var animateUrl = current.attr('data-animate');
+      console.log(animateUrl);
+      var stillUrl = current.attr('data-still');
+      
+      if(state === 'still') {
+        current.attr('src', animateUrl);
+        current.attr('data-state', 'animate');
+      } else {
+        current.attr('src', stillUrl);
+        current.attr('data-state', 'still');
+      };
+    });
       // displayMovieInfo function re-renders the HTML to display the appropriate content
       function displayMovieInfo() {
         // movie = search
         var search = $(this).attr('data-name');
         // console.log(search);
         var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
-        search + "&api_key=dc6zaTOxFJmzC&limit=3&rating=g&rating=pg&rating=pg-13";
+        search + "&api_key=dc6zaTOxFJmzC&limit=10&rating=g&rating=pg&rating=pg-13";
 
         // Creates AJAX call for the specific movie button being clicked
         $.ajax({
@@ -13,6 +28,7 @@
           method: "GET"
         }).done(function(response) {
           // Creates a div to hold the movie
+          console.log(response);
           var results = response.data;
 
           for (var i = 0; i < results.length; i++) {
@@ -20,7 +36,11 @@
             var rating = results[i].rating;
             var p = $('<p>').text('Rating: ' + rating);
             var personImage = $('<img>');
-            personImage.attr('src', results[i].images.fixed_height.url);
+            personImage.attr('src', response.data[i].images.original_still.url);
+            personImage.attr('data-still', response.data[i].images.original_still.url);
+            personImage.attr('data-animate', response.data[i].images.original.url);
+            personImage.attr('data-state', 'still');
+            personImage.addClass('gif');
             gifDiv.prepend(p);
             gifDiv.prepend(personImage);
             $('#gifs-appear-here').prepend(gifDiv);
@@ -69,7 +89,7 @@
           // btn.appendChild(t);
           btn.addClass('movie');
           btn.attr('data-name', movie);
-          console.log(btn);
+          // console.log(btn);
           // document.body.appendChild(btn);
 
 
