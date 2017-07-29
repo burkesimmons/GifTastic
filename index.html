@@ -8,74 +8,28 @@
 </head>
 
 <body>
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 
   <div class="container">
     <h1>Rock Star Gif Search</h1>
 
     <!-- Rendered buttons will get dumped here  -->
-    <div id="first-buttons-view"></div>
+    <div id="first-buttons-view" class="big-button"></div>
     <div id="buttons-view"></div>
 
-    <form id="movie-form">
-      <label for="movie-input">Add a Rock Star</label>
-      <input type="text" id="movie-input"><br>
+    <form id="rock-form">
+      <label for="rock-input">Add a Rock Star</label>
+      <input type="text" id="rock-input"><br>
 
-      <!-- Button triggers new movie to be added -->
-      <input id="add-movie" type="submit" value="Add a Rock Star">
+      <!-- Button triggers new rock star to be added -->
+      <input id="add-rock" type="submit" value="Click to add">
     </form>
+
     <div id="gifs-appear-here">
-    <!-- Movies will get dumped Dere -->
-    <!-- <div id="movies-view"></div> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="assets/javascript/app.js"></script>
     </div>
   </body>
-
-  <!-- <body>
-  <div id="imagediv"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript">
-    
-    $('body').on('click', '.gif', function() {
-      var current = $(this);
-      var state = $(this).attr('data-state');
-      console.log(state);
-      var animateUrl = current.attr('data-animate');
-      console.log(animateUrl);
-      var stillUrl = current.attr('data-still');
-      
-      if(state === 'still') {
-        current.attr('src', animateUrl);
-        current.attr('data-state', 'animate');
-      } else {
-        current.attr('src', stillUrl);
-        current.attr('data-state', 'still');
-      };
-    });
-
-    function displayGif () {
-
-    var queryURL = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
-    
-    $.ajax({
-      url: queryURL,
-      method: 'GET'
-    }).done(function(response) {
-      console.log(response);
-      for (var i = 0; i < response.data.length; i++) {
-        var img = $('<img>'); //Equivalent: $(document.createElement('img'))
-        img.attr('src', response.data[i].images.original_still.url);
-        img.attr('data-still', response.data[i].images.original_still.url);
-        img.attr('data-animate', response.data[i].images.original.url);
-        img.attr('data-state', 'still');
-        img.addClass('gif');
-        img.appendTo('#imagediv');
-      };
-    });
-  };
-  displayGif();
-  </script>
-</body> -->
 
 </html>

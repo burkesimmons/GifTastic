@@ -14,99 +14,112 @@
         current.attr('data-state', 'still');
       };
     });
-      // displayMovieInfo function re-renders the HTML to display the appropriate content
-      function displayMovieInfo() {
-        // movie = search
+      // displayRockStar function re-renders the HTML to display the appropriate content
+      function displayRockStar() {
+        // rock = search
         var search = $(this).attr('data-name');
         // console.log(search);
         var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
-        search + "&api_key=dc6zaTOxFJmzC&limit=10&rating=g&rating=pg&rating=pg-13";
+        search + "&api_key=dc6zaTOxFJmzC&limit=10";
 
-        // Creates AJAX call for the specific movie button being clicked
+        // Creates AJAX call for the specific rock button being clicked
         $.ajax({
           url: queryURL,
           method: "GET"
         }).done(function(response) {
-          // Creates a div to hold the movie
+          // Creates a div to hold the rock
           console.log(response);
           var results = response.data;
 
           for (var i = 0; i < results.length; i++) {
             var gifDiv = $('<div class ="item">');
             var rating = results[i].rating;
-            var p = $('<p>').text('Rating: ' + rating);
             var personImage = $('<img>');
-            personImage.attr('src', response.data[i].images.original_still.url);
-            personImage.attr('data-still', response.data[i].images.original_still.url);
-            personImage.attr('data-animate', response.data[i].images.original.url);
+            var p = $('<p>').text('Rating: ' + rating);
+            personImage.attr('src', response.data[i].images.fixed_height_still.url);
+            personImage.attr('data-still', response.data[i].images.fixed_height_still.url);
+            personImage.attr('data-animate', response.data[i].images.fixed_height.url);
             personImage.attr('data-state', 'still');
             personImage.addClass('gif');
-            gifDiv.prepend(p);
             gifDiv.prepend(personImage);
+            gifDiv.prepend(p);
             $('#gifs-appear-here').prepend(gifDiv);
           }
         });
       };
 
- var movies = ["The Matrix", "The Notebook", "Mr. Nobody", "The Lion King"];
+ var rockStars = ["The Beatles", "Beach Boys", "Mick Jagger", "Elvis"];
 
-      // Function for displaying movie data
+      // Function for displaying rock data
       function renderButtons() {
 
-        // Deletes the movies prior to adding new movies
+        // Deletes the rockStars prior to adding new rockStars
         // (this is necessary otherwise you will have repeat buttons)
         $('#buttons-view').empty();
-        // Loops through the array of movies
-        for (var i = 0; i < movies.length; i++) {
+        // Loops through the array of rockStars
+        for (var i = 0; i < rockStars.length; i++) {
           
-          movies.sort();
+          rockStars.sort();
 
-          // Then dynamicaly generates buttons for each movie in the array
+          // Then dynamicaly generates buttons for each rock in the array
           // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
           var a = $('<button>');
-          // Adds a class of movie to our button
-          a.addClass('movie');
+          // Adds a class of rock to our button
+          a.addClass('rock');
           // Added a data-attribute
-          a.attr('data-name', movies[i]);
+          a.attr('data-name', rockStars[i]);
           // Provided the initial button text
-          a.text(movies[i]);
+          a.text(rockStars[i]);
 
           // Added the button to the buttons-view div
           $("#buttons-view").append(a);
         }
       }
 
-      // This function handles events where the add movie button is clicked
-      $("#add-movie").on("click", function(event) {
+      // This function handles events where the add rock button is clicked
+      $("#add-rock").on("click", function(event) {
         event.preventDefault();
         // This line of code will grab the input from the textbox
-        var movie = $("#movie-input").val().trim();
-        // The movie from the textbox is then added to our array
-        // Calling renderButtons which handles the processing of our movie array
+        var rock = $("#rock-input").val().trim();
+        // The rock from the textbox is then added to our array
+        // Calling renderButtons which handles the processing of our rock array
           var btn = $('<button>');
-          // var t = document.createTextNode(movie);
-          btn.text(movie);
+          // var t = document.createTextNode(rock);
+          btn.text(rock);
           // btn.appendChild(t);
-          btn.addClass('movie');
-          btn.attr('data-name', movie);
+          btn.addClass('rock big-button');
+          btn.attr('data-name', rock);
           // console.log(btn);
-          // document.body.appendChild(btn);
-
-
 
           // Added the button to the buttons-view div
         $('#first-buttons-view').empty();
         $('#first-buttons-view').append(btn);
-        // displayMovieInfo();
         // console.log(event);
         renderButtons();
-        movies.push(movie);
+        rockStars.push(rock);
 
-        // console.log(movie);
+        // console.log(rock);
       });
 
-      // Adding click event listeners to all elements with a class of "movie"
-      $(document).on("click", ".movie", displayMovieInfo);
+      // Adding click event listeners to all elements with a class of "rock"
+      $(document).on("click", ".rock", displayRockStar);
 
       // Calling the renderButtons function to display the intial buttons
       renderButtons();
+
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function() {scrollFunction()};
+
+      function scrollFunction() {
+          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+              document.getElementById("myBtn").style.display = "block";
+          } else {
+              document.getElementById("myBtn").style.display = "none";
+          }
+      }
+
+      // When the user clicks on the button, scroll to the top of the document
+      function topFunction() {
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
+      }
