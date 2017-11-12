@@ -3,33 +3,58 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Rock Star Gifs</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
 <body>
-<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 
-  <div class="container">
-    <h1>Rock Star Gif Search</h1>
+<button onclick="toTheTop()" id="myBtn" title="Go to top">Top</button>
 
-    <!-- Rendered buttons will get dumped here  -->
-    <div id="first-buttons-view" class="big-button"></div>
-    <div id="buttons-view"></div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
+      <div id="first-buttons-view">
+<!--         <span class="big-button">CARTOON</span>
+ -->      </div>
+    </div>
+    <div class="col-xs-8 col-sm-9 col-md-9 col-lg-9">
+       <h1>Cartoon Character Gif Search</h1>
+       <hr>
+       <h3 class="text-center" style="color: white;">Add a Cartoon Character</h3>
+        <div">
+         
+          <input type="text" id="add-cartoon" class="form-control">
+            <span class="input-group-btn">
+              <button id="cartoon-button" class="btn btn-default" type="button">Add Cartoon</button>
+           
+            </span>
+         <!-- </form> -->
+        </div>
+    </div>
+  </div>
 
-    <form id="rock-form">
-      <label for="rock-input">Add a Rock Star</label>
-      <input type="text" id="rock-input"><br>
+  <div class="row">
+    <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" id="buttons-view">
+      <!-- Rendered buttons will get dumped here  -->
+     
+    </div>
 
-      <!-- Button triggers new rock star to be added -->
-      <input id="add-rock" type="submit" value="Click to add">
-    </form>
+    <div class="col-xs-8 col-sm-9 col-md-9 col-lg-9" id="gifs-appear-here">
+       
+    </div>
+  </div>
+</div>
 
-    <div id="gifs-appear-here">
+
+  
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="assets/javascript/app.js"></script>
-    </div>
   </body>
 
 </html>
